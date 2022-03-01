@@ -1,9 +1,16 @@
 public class Main {
-   public static void main(String[] args) {
-       int arr[] = {0,1,2,3,4};
-        int x = 4;
+    public static void main(String[] args) {
+        int arr[] = {0,1,2,3,4};
+        int x = 100;
         
-        int result = binarySearch(arr, x);
+        // Iterative Binary Search:
+        //int result = binarySearch(arr, x);
+
+
+        // Recursive Binary Search:
+        int result = binarySearchRecursive(arr, x, 0, arr.length - 1);
+
+
         if (result == -1) {
             System.out.println("Element not found");
         } else {
@@ -15,36 +22,75 @@ public class Main {
     // Iterative Binary Search on Array
     
     // Returns index of x if present in array
-   // else returns -1
+    // else returns -1
 
-   static int binarySearch(int arr[], int x) {
-       int l = 0;
-       int r = arr.length - 1;
+    static int binarySearch(int arr[], int x) {
+        int l = 0;
+        int r = arr.length - 1;
 
-       System.out.println(String.format("X: %d, Array length: %d", x, arr.length));
+        System.out.println(String.format("X: %d, Array length: %d", x, arr.length));
 
-       while (l <= r) {
-           //int m = l + (r-l)/2;
-           int m = (l + r) / 2;
+        while (l <= r) {
 
-           System.out.println(String.format("Left: %d, Middle: %d, Right: %d", l, m, r));
+            //int m = l + (r-l)/2;
+            int m = (l + r) / 2;
 
-           // Check if x present in the middle
-           if (arr[m] == x) {
-               return m;
-           }
+            System.out.println(String.format("Left: %d, Middle: %d, Right: %d", l, m, r));
 
-           // if x is greater, ignore left half
-           if (arr[m] < x) {
-               l = m + 1;
-           } else {
-               r = m - 1;
-           }
+            // Check if x present in the middle
+            if (arr[m] == x) {
+                return m;
+            }
 
-       } // end while
+            // if x is greater, ignore left half
+            if (arr[m] < x) {
+                l = m + 1;
+            } else {
+                r = m - 1;
+            }
 
-       return -1;
+        } // end while
 
-   } // end method
+
+        // Element not found
+        return -1;
+
+    } // end method
+
+
+
+
+
+    // Recursive Binary Search
+    // Returns the index of x
+    // If not found, returns -1
+
+    static int binarySearchRecursive(int[] arr, int x, int l, int r) {
+        if (r >= l) {
+            int m = (l + r)/2;
+
+            System.out.println(String.format("Left: %d, Middle: %d, Right: %d", l, m, r));
+
+            if (arr[m] == x) {
+                return m;
+            }
+
+            if (arr[m] > x) {
+                r = m - 1;
+                return binarySearchRecursive(arr, x, l, r);
+            }
+
+            if (arr[m] < x) {
+                l = m + 1;
+                return binarySearchRecursive(arr, x, l, r);
+            }
+        }
+        
+
+        return -1;
+
+    } // end method
+
+
 
 } // end class
