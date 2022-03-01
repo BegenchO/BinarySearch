@@ -1,7 +1,7 @@
 public class Main {
    public static void main(String[] args) {
-       int arr[] = {2,3,4,10,40};
-        int x = 10;
+       int arr[] = {0,1,2,3,4};
+        int x = 4;
         
         int result = binarySearch(arr, x);
         if (result == -1) {
@@ -21,8 +21,13 @@ public class Main {
        int l = 0;
        int r = arr.length - 1;
 
+       System.out.println(String.format("X: %d, Array length: %d", x, arr.length));
+
        while (l <= r) {
-           int m = l + (r-l)/2;
+           //int m = l + (r-l)/2;
+           int m = (l + r) / 2;
+
+           System.out.println(String.format("Left: %d, Middle: %d, Right: %d", l, m, r));
 
            // Check if x present in the middle
            if (arr[m] == x) {
